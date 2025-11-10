@@ -1,0 +1,271 @@
+\chapter{Nov.~10 --- Index Arithmetic}
+
+\section{Index Arithmetic}
+
+\begin{remark}
+  Recall that if $r$ is a primitive
+  root modulo $m$, then the set
+  \[
+    \{r, r^2, r^3, \dots, r^{\varphi(m)}\}
+  \]
+  is a reduced residue system modulo $m$.
+\end{remark}
+
+\begin{definition}
+  Let $r$ be a primitive root modulo $m$.
+  If $(a, m) = 1$, then the
+  \emph{index of $a$ relative to $r$},
+  denoted $\ind_r a$, is the least
+  positive integer $n$ for which
+  $r^n \equiv a \Pmod{m}$.
+\end{definition}
+
+\begin{remark}
+  The index $\ind_r a$ always
+  exists and satisfies
+  $1 \le \ind_r a \le \varphi(m)$.
+\end{remark}
+
+\begin{example}
+  Recall that $3$ is a primitive root
+  modulo $7$. We can compute that
+  \begin{align*}
+    3^1 \equiv 3 \pmod{7}, \\
+    3^2 \equiv 2 \pmod{7}, \\
+    3^3 \equiv 6 \pmod{7}, \\
+    3^4 \equiv 4 \pmod{7}, \\
+    3^5 \equiv 5 \pmod{7}, \\
+    3^6 \equiv 1 \pmod{7}.
+  \end{align*}
+  Thus we see that the indices are
+  \begin{align*}
+    \ind_3 3 = 1, \\
+    \ind_3 2 = 2, \\
+    \ind_3 6 = 3, \\
+    \ind_3 4 = 4, \\
+    \ind_3 5 = 5, \\
+    \ind_3 1 = 6.
+  \end{align*}
+\end{example}
+
+\begin{remark}
+  If $a, b$ are coprime with $m$
+  and $a \equiv b \Pmod{m}$, then
+  $\ind_r a = \ind_r b$.
+\end{remark}
+
+\begin{remark}
+  Indices enjoy similar
+  properties as logarithms.
+\end{remark}
+
+\begin{prop}
+  Let $r$ be a primitive root modulo $m$
+  and $a, b \in \Z$ coprime to $m$. Then
+  \begin{enumerate}
+    \item $\ind_r 1 \equiv 0 \Pmod{\varphi(m)}$,
+    \item $\ind_r r \equiv 1 \Pmod{\varphi(m)}$,
+    \item $\ind_r(ab) \equiv \ind_r a + \ind_r b \Pmod{\varphi(m)}$,
+    \item $\ind_r(a^n) \equiv n \ind_r a \Pmod{\varphi(m)}$ if $n > 0$
+      is an integer.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  (1)-(2) These are clear.
+
+  (3) By definition, we have
+  $r^{\ind_r a} \equiv a \Pmod{m}$
+  and $r^{\ind_r b} \equiv b \Pmod{m}$.
+  Thus
+  \[
+    r^{\ind_r a + \ind_r b}
+    \equiv ab
+    \equiv r^{\ind_r(ab)} \pmod{m}.
+  \]
+  By Proposition \ref{prop:order-congruence},
+  we have
+  $\ind_r a + \ind_r b \equiv \ind_r(ab) \Pmod{\varphi(m)}$, since
+  $\ord_m r = \varphi(m)$.
+
+  (4) We argue similarly as in (3):
+  By definition,
+  $r^{\ind_r a^n} \equiv a^n \Pmod{m}$.
+  Also,
+  \[
+    r^{n \ind_r a}
+    \equiv (r^{\ind_r a})^n
+    \equiv a^n \pmod{m},
+  \]
+  so again by Proposition \ref{prop:order-congruence},
+  $n \ind_r a \equiv \ind_r(a^n) \Pmod{\varphi(m)}$.
+\end{proof}
+
+\begin{example}
+  We work modulo $7$ with primitive root
+  $3$. Then $\ind_3 2 = 2$ and
+  $\ind_3 3 = 1$, so
+  \[
+    \ind_3 6
+    \equiv \ind_3 (2 \cdot 3)
+    \equiv \ind_3 2 + \ind_3 3
+    \equiv 3 \pmod{6}.
+  \]
+  So $\ind_3 6 = 3$, which agrees with
+  our previous calculations.
+\end{example}
+
+\begin{remark}
+  Suppose $r$ is a primitive
+  root modulo $m$ and
+  $(a, m) = (b, m) = 1$. Consider
+  for $n > 0$
+  \[
+    a x^n \equiv b \pmod{m}.
+  \]
+  This congruence is equivalent to
+  $\ind_r(b) \equiv \ind_r(ax^n) \equiv \ind_r(a) + n \ind_r(x) \Pmod{\varphi(m)}$,
+  so
+  \[
+    n \ind_r(x) \equiv \ind_r(b) - \ind_r(a) \Pmod{\varphi(m)}.
+  \]
+  This is now a linear congruence which
+  is equivalent to the original one.
+\end{remark}
+
+\begin{example}
+  Use indices to find all incongruent
+  solutions to
+  \[
+    6x^4 \equiv 3 \pmod{7}.
+  \]
+  Since $3$ is a primitive root, we can
+  compute that
+  \[
+    4 \ind_3(x)
+    \equiv \ind_3(3) - \ind_3(6)
+    \equiv 1 - 3
+    \equiv 4 \Pmod{6}.
+  \]
+  Note $(4, 6) = 2$ and
+  $2 \mid 4$, so this congruence
+  has $2$ solutions by
+  Theorem \ref{thm:linear-solutions-number}. Dividing by $2$, we get
+  \[
+    2\ind_3(x) \equiv 2 \Pmod{3},
+  \]
+  so $\ind_3(x) \equiv 1 \Pmod{3}$.
+  Thus $\ind_3(x) \equiv 1, 4 \Pmod{6}$.
+  This corresponds to
+  $x \equiv 3^1, 3^4 \equiv 3, 4 \Pmod{7}$.
+\end{example}
+
+\section{Power Residues}
+\begin{definition}
+  Let $a, m, n \in \Z$ with
+  $m, n > 0$ and $(a, m) = 1$. Then
+  $a$ is an \emph{$n$th power residue modulo $m$}
+  if the congruence $x^n \equiv a \Pmod{m}$
+  has a solution.
+\end{definition}
+
+\pagebreak
+
+\begin{example}
+  We have the following:
+  \begin{enumerate}
+    \item $6$ is a $3$rd power residue modulo $7$ (we have calculated $\ind_3 6 = 3$).
+    \item $3$ is a $4$th power residue modulo $13$ (one has $2^4 \equiv 16 \equiv 3 \Pmod{13}$).
+    \item $3$ is not a $4$th power residue modulo $7$ (exercise).
+  \end{enumerate}
+\end{example}
+
+\begin{theorem}\label{thm:nth-power-residue-criterion}
+  Let $a, m, n \in \Z$ with $m, n > 0$
+  and $(a, m) = 1$. If $m$ has a primitive
+  root, then $a$ is an $n$th power residue
+  modulo $m$ if and only if
+  \[
+    a^{\varphi(m) / d} \equiv 1 \pmod{m},
+  \]
+  where $d = (n, \varphi(m))$. Furthermore,
+  in this case, the congruence $x^n \equiv a \Pmod{m}$
+  has exactly $d$ incongruent
+  solutions modulo $m$.
+\end{theorem}
+
+\begin{proof}
+  Let $r$ be a primitive root modulo $m$.
+  Then the congruence
+  $x^n \equiv a \Pmod{m}$ is equivalent to
+  \[
+    n \ind_r(x) \equiv \ind_r(a) \pmod{\varphi(m)}.
+  \]
+  This congruence is solvable if and only if
+  $d = (n, \varphi(m))$ divides
+  $\ind_r a$
+  by Theorem \ref{thm:linear-solutions-number}.
+  In this case, there are $d$ incongruent
+  solutions. The condition
+  $d \mid \ind_r a$ is equivalent to
+  \[
+    \frac{\varphi(m)}{d} \ind_r a
+    \equiv 0 \pmod{\varphi(m)}.
+  \]
+  The forward implication is clear,
+  and the congruence implies
+  $(\varphi(m) / d) \ind_r a = k \varphi(m)$
+  for some $k \in \Z$, so
+  $\ind_r a = dk$, so $d \mid \ind_r a$.
+  The congruence is equivalent to
+  $a^{\varphi(m) / d} \equiv 1 \Pmod{m}$.
+\end{proof}
+
+\begin{corollary}[Euler's criterion]
+  Let $p$ be an odd prime and $a \in \Z$ 
+  with $p \nmid a$. Then $a$ is a
+  quadratic residue modulo $p$ if
+  and only if
+  \[
+    a^{(p - 1) / 2} \equiv 1 \pmod{p}.
+  \]
+  Moreover, if this is the case, there
+  are exactly $2$ incongruent solutions
+  to $x^2 \equiv a \Pmod{p}$.
+\end{corollary}
+
+\begin{proof}
+  Take $m = p$ and $n = 2$ in Theorem
+  \ref{thm:nth-power-residue-criterion}.
+\end{proof}
+
+\begin{example}
+  Let $a = 6$, $m = 7$, $n = 3$.
+  A primitive root modulo $7$ is $3$.
+  The congruence
+  \[
+    x^3 \equiv 6 \pmod{7}
+  \]
+  has $d = (3, \varphi(7)) = (3, 6) = 3$
+  solutions, so $6$ is a $3$rd power
+  residue modulo $7$.
+\end{example}
+
+\begin{example}
+  Find all $15$th power residues modulo $9$.
+  Since $9$ has a primitive root by the
+  primitive root theorem, the congruence
+  $x^{15} \equiv a \Pmod{9}$ has
+  has solutions if and only if
+  \[
+    a^{\varphi(9) / d}
+    \equiv 1 \pmod{9},
+  \]
+  where $d = (15, \varphi(9)) = (15, 6) = 3$.
+  Thus we must have
+  $1 \equiv a^{6 / 3} \equiv a^2 \Pmod{9}$,
+  so $a \equiv \pm 1 \Pmod{9}$
+  are the only solutions. So the
+  only $15$th power residues modulo $9$
+  are $\pm 1$.
+\end{example}
