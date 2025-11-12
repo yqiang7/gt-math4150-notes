@@ -1,0 +1,251 @@
+\chapter{Nov.~12 --- Diophantine Equations}
+
+\section{Linear Diophantine Equations}
+
+\begin{definition}
+  Any equation with one or more variables
+  to be solved in the integers is called a
+  \emph{Diophantine equation}.
+\end{definition}
+
+\begin{example}
+  We can consider $5x^2 - 2x + 1 = 0$
+  as a Diophantine equation.
+\end{example}
+
+\begin{definition}
+  Let $a_1, \dots, a_n, b \in \Z$
+  with $a_1, \dots, a_n \ne 0$. A
+  Diophantine equation of the form
+  \[
+    a_1 x_1 + a_2 x_2 + \dots + a_n x_n = b
+  \]
+  is called a \emph{linear Diophantine equation}.
+\end{definition}
+
+\begin{theorem}
+  Let $ax = b$ be a linear Diophantine
+  equation in the variable $x$.
+  If $a \mid b$, then there is a
+  unique solution $x = b / a$. If
+  $a \nmid b$, then there is no solution.
+\end{theorem}
+
+\begin{theorem}
+  Let $ax + by = c$ be a linear Diophantine
+  equation in the variables $x, y$.
+  Let $d = (a, b)$. If $d \nmid c$,
+  then there are no solutions.
+  If $d \mid c$, there are infinitely
+  many solutions, given by
+  \[
+    x = x_0 + (b / d) n \quad \text{and} \quad
+    y = y_0 - (a / d) n, \quad
+    n \in \Z
+  \] 
+  for a particular solution
+  $x_0, y_0 \in \Z$.
+\end{theorem}
+
+\begin{proof}
+  If there were a solution
+  $x, y \in \Z$, then
+  $d \mid a$ and $d \mid b$, so
+  then $d \mid ax + by = c$.
+  Taking the contrapositive implies that
+  if $d \nmid c$, then there cannot be
+  any solutions.
+
+  Now assume that $d \mid c$.
+  Using the Euclidean algorithm we can find
+  $r, s \in \Z$ such that
+  \[
+    d = (a, b) = ra + sb.
+  \]
+  Further, if $d \mid c$, then $c = dq$ 
+  for some $q \in \Z$, so we may write
+  \[
+    c = (ra + sb) q
+    = a(rq) + b(sq).
+  \]
+  Thus $x = rq$ and
+  $y = sq$ is a particular solution.
+
+  Now, let $x_0, y_0$ be any particular
+  solution and $x = x_0 + (b / d) n$,
+  $y = y_0 - (a / d) n$ for some
+  $n \in \Z$. Then
+  \begin{align*}
+    ax + by
+    &= a(x_0 + (b / d) n) + b(y_0 - (a / d) n) \\
+    &= ax_0 + by_0 + nab / d - nab / d
+    = ax_0 + by_0
+    = c,
+  \end{align*}
+  so $x, y$ is a solution
+  for any integer $n$.
+
+  Finally, we check that every solution
+  is of this form.
+  Let $x, y$ be any solution. Note that
+  \[
+    0 = (ax + by) - (ax_0 + by_0)
+    = a(x - x_0) + b(y - y_0),
+  \]
+  so $a(x - x_0) = b(y_0 - y)$.
+  Dividing both sides by $d$, we get
+  \[
+    \frac{a}{d} (x - x_0)
+    = \frac{b}{d} (y_0 - y).
+  \] 
+  Since $d = (a, b)$, we have
+  $(a / d, b / d) = 1$, so
+  $a / d \mid y_0 - y$. Thus
+  $y_0 - y = (a / d) n$ for some $n \in \Z$,
+  so we have
+  $y = y_0 - (a / d) n$. Substituting
+  this above, we get
+  $x = x_0 + (b / d) n$.
+\end{proof}
+
+\begin{example}
+  Determine if
+  $803 x + 154 y = 11$ has solutions.
+  If so, calculate all of them.
+
+  Using the Euclidean algorithm, we
+  can compute that
+  \[
+    (803, 154)
+    = (33, 154)
+    = (33, 22)
+    = 11,
+  \]
+  where we used that
+  \begin{align*}
+    803 &= 5 \cdot 154 + 33 \\
+    154 &= 4 \cdot 33 + 22 \\
+    33 &= 1 \cdot 22 + 11.
+  \end{align*}
+  Thus we can write
+  \begin{align*}
+    11 &= 33 - 22
+    = 33 - (154 - 4 \cdot 33) \\
+       &= 5 \cdot 33 - 154
+    = 5(803 - 5 \cdot 154) - 154 \\
+       &= 5 \cdot 803 - 26 \cdot 154.
+  \end{align*}
+  Thus $22 = 803 \cdot 10 + 154 \cdot (-52)$,
+  so $(10, -52) $ is a particular solution.
+  The other solutions are given by
+  \[
+    x = 10 + \frac{154}{11} n
+    = 10 + 14 n \quad \text{and} \quad
+    y = -52 - \frac{803}{11} n
+    = -52 - 73 n, \quad n \in \Z.
+  \]
+\end{example}
+
+\section{Nonlinear Diophantine Equations}
+
+\begin{definition}
+  A Diophantine equation is
+  \emph{nonlinear} if it is not linear.
+\end{definition}
+
+\begin{example}
+  The Diophantine equations
+  $ax^2 + bx = c$
+  and $5x^3 - 2 = 7x^{420}$ are nonlinear.
+\end{example}
+
+\begin{remark}
+  We can now use a method that shows
+  some equations are \emph{not}
+  solvable. The idea is the following:
+  if a Diophantine equation has solutions,
+  then the equation will also have a
+  solution when viewed as a congruence
+  modulo any modulus. Taking the
+  contrapositive, if a particular
+  congruence modulo some modulus
+  modulus is not solvable, then
+  neither is the original equation.
+\end{remark}
+
+\begin{example}
+  Prove that $3x^2 + 2 = y^2$ is
+  not solvable.
+
+  Assume by way of contradiction
+  that there is a solution. Consider
+  the equation modulo $3$:
+  \[
+    y^2 \equiv 3x^2 + 2
+    \equiv 2 \pmod{3}.
+  \]
+  This says that $2$ is a quadratic
+  residue modulo $3$, which is
+  false. Therefore, there are no solutions.
+\end{example}
+
+\begin{example}
+  Prove that $7x^3 + 2 = y^3$
+  has no solutions.
+
+  Consider the equation modulo $7$:
+  \[
+    y^3 \equiv 7x^3 + 2
+    \equiv 2 \pmod{7}.
+  \]
+  This is solvable if and only if
+  $2$ is a cubic residue modulo $7$, but
+  we can compute that
+  \[
+    \{0^3, 1^3, 2^3, 3^3, 4^3, 5^3, 6^3\}
+    \equiv
+    \{0, 1, 1, 6, 1, 6, 6\} \pmod{7},
+  \]
+  so the only nonzero cubic residues are
+  $1, 6$. Thus the congruence modulo $4$
+  has no solutions, hence
+  the original equation also has
+  no solutions.
+\end{example}
+
+\begin{example}
+  Prove that $x^2 + y^2 + 1 = 4z$ 
+  has no solutions.
+
+  Take this equation modulo $4$, we get
+  the following congruence:
+  \[
+    x^2 + y^2 \equiv 3 \pmod{4}.
+  \]
+  The only quadratic residues modulo $4$
+  are $\{0, 1\}$, and none of
+  $0 + 0$, $0 + 1$, or $1 + 1$
+  is equal to $3$, so there are no
+  solutions to this congruence.
+\end{example}
+
+\begin{exercise}
+  Prove that $x^2 + 2y^2 + 3 = 8z$ has
+  no solutions.
+
+  Take this equation modulo $8$:
+  \[
+    x^2 + 2y^2 \equiv 5 \pmod{8}.
+  \]
+  Note that the only quadratic residues
+  modulo $8$ are $0, 1, 4$.
+  Taking the above equation modulo
+  $2$ we see that $x^2$ must be odd,
+  so $x^2 \equiv 1 \Pmod{8}$. Then we get
+  \[
+    2y^2 \equiv 4 \pmod{8},
+  \]
+  so after dividing by $2$
+  we get $y^2 \equiv 2 \Pmod{4}$, which is
+  not possible.
+\end{exercise}
