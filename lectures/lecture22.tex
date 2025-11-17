@@ -1,0 +1,208 @@
+\chapter{Nov.~17 --- Pythagorean Triples}
+
+\section{Classification of Pythagorean Triples}
+
+\begin{definition}
+  A triple $x, y, z$ of positive integers
+  satisfying the Diophantine
+  $x^2 + y^2 = z^2$ is said to be a
+  \emph{Pythagorean triple}.
+\end{definition}
+
+\begin{example}
+  The following are Pythagorean triples:
+  $3, 4, 5$ and $5, 12, 13$.
+\end{example}
+
+\begin{remark}
+  The triples $-3, 4, 5$ and
+  $0, 1, 1$ are solutions to
+  $x^2 + y^2 = z^2$,
+  but they are not Pythagorean triples
+  (as they are not positive integers).
+\end{remark}
+
+\begin{remark}
+  We take the following conventions:
+  \begin{itemize}
+    \item We only describe solutions with
+      $x, y, z > 0$.
+    \item If $x, y, z$ is a Pythagorean
+      triple and $(x, y, z) = d$, then
+      $x / d, y / d, z / d$ is also a
+      Pythagorean triple, and
+      $(x / d, y / d, z / d) = 1$.
+      Thus we will only describe
+      Pythagorean triples $x, y, z$ with
+      $(x, y, z) = 1$.
+      Such triples are called \emph{primitive}.
+    \item Under the assumption that
+      $x, y, z$ is a primitive
+      Pythagorean triple, we show
+      that exactly one of $x, y$ is even.
+      We can see this as follows:
+
+      First assume that $x$ and $y$
+      are both even. Then $2 \mid x$ and
+      $2 \mid y$, and since
+      $z^2 = x^2 + y^2$, we have
+      $2 \mid z^2$, and so $2 \mid z$.
+      This contradicts $(x, y, z) = 1$.
+
+      Now assume that $x$ and $y$ are
+      both odd. Then $z$ is even, so
+      $z^2 \equiv 0 \Pmod{4}$, and
+      $x^2 \equiv y^2 \equiv 1 \Pmod{4}$.
+      Since $x^2 + y^2 = z^2$, we have
+      that $1 + 1 \equiv 0 \Pmod{4}$,
+      a contradiction.
+
+      Thus exactly one of $x$ or $y$
+      is even, so without loss of generality
+      we will only describe Pythagorean
+      triples where $y$ is even.
+  \end{itemize}
+\end{remark}
+
+\begin{theorem}[Euclid]\label{thm:pythagorean-triples}
+  There are infinitely many primitive
+  Pythagorean triples $x, y, z$ with
+  $y$ even. They are given by
+  $x = m^2 - n^2$, $y = 2mn$,
+  $z = m^2 + n^2$, where
+  $m, n \in \Z$, $m > n > 0$,
+  $(m, n) = 1$, and exactly one of
+  $m$ or $n$ is even.
+\end{theorem}
+
+\begin{example}
+  The case
+  $m = 2$, $n = 1$ yields
+  $3, 4, 5$, and the case
+  $m = 3$, $n = 2$ yields $5, 12, 13$.
+\end{example}
+
+\begin{proof}[Proof of Theorem \ref{thm:pythagorean-triples}]
+  We first show that given a primitive
+  Pythagorean triple with $y$ even,
+  there exist $m, n \in \Z$ with
+  the properties described in the theorem.
+  Since $y$ is even, $x$ and $z$ are both
+  odd (see the argument from before).
+  A similar argument shows that
+  $(x, y) = (y, z) = (x, z) = 1$. Now
+  \[
+    y^2 = z^2 - x^2
+    = (z + x)(z - x)
+  \]
+  Since $y, z + x, z - x$ are all even,
+  dividing by $2$ everywhere gives
+  \[
+    \left(\frac{y}{2}\right)^2
+    = \left(\frac{z + x}{2}\right)
+    \left(\frac{z - x}{2}\right). \tag{$1$}
+  \]
+  Now we claim
+  $((z + x) / 2, (z - x) / 2) = 1$.
+  To see this, let
+  $d = ((z + x) / 2, (z - x) / 2)$.
+  Then $d \mid (z + x) / 2$ and
+  $d \mid (z - x) / 2$, so taking linear
+  combinations gives
+  \begin{align*}
+    d \mid \frac{z + x}{2} + \frac{z - x}{2} = z, \\
+    d \mid \frac{z + x}{2} - \frac{z - x}{2} = x
+  \end{align*}
+  so $d = 1$ since $(x, z) = 1$.
+  Thus $(1)$ implies that
+  $(z + x) / 2$ and
+  $(z - x) / 2$ are both perfect squares
+  by the fundamental theorem of arithmetic.
+  Let $m, n \in \Z$ positive such that
+  \[
+    \frac{z + x}{2} = m^2
+    \quad\text{and}\quad
+    \frac{z - x}{2} = n^2.
+  \]
+  Then $m > n > 0$, $(m, n) = 1$ since
+  their squares are coprime, and
+  \[
+    m^2 - n^2 = x, \quad
+    2mn = y, \quad m^2 + n^2 = z.
+  \]
+  Also, $(m, n) = 1$ implies
+  that not both $m$ and $n$ are even.
+  If $m$ and $n$ are both odd, then we have
+  that
+  \[
+    z = m^2 + n^2 \quad \text{and} \quad
+    x = m^2 - n^2
+  \]
+  are both even, contradicting the
+  fact that $(x, z) = 1$. This completes
+  the first part.
+
+  The second part of the proof is to show
+  that given $m$ and $n$ as described and
+  \[
+    x = m^2 - n^2, \quad
+    y = 2mn, \quad
+    z = m^2 + n^2,
+  \]
+  then $x, y, z$ is a primitive
+  Pythagorean triple with $y$ even. We
+  check that
+  \[
+    x^2 + y^2
+    = (m^4 - 2m^2 n^2 + n^4)
+    + 4m^2 n^2
+    = m^4 + 2m^2 n^2 + n^4
+    = (m^2 + n^2)^2 = z^2,
+  \]
+  so $x, y, z$ is indeed
+  a Pythagorean triple. Clearly $y$ is
+  even. It remains to prove
+  that $(x, y, z) = 1$. To see this, let
+  $(x, y, z) = d$. Since exactly
+  one of $m$ or $n$ is even, we have
+  that $x$ and $z$ are both odd. Then
+  $d$ is odd, and so $d = 1$ or $p \mid d$
+  for some odd prime $p$. Assume
+  that $p \mid d$. Then $p \mid x$ and
+  $p \mid z$, and so
+  $p \mid z + x$ and $p \mid z - x$.
+  Thus $p \mid m^2 + n^2 + m^2 - n^2 = 2m^2$
+  and $p \mid m^2 + n^2 - (m^2 - n^2) = 2n^2$.
+  Since $p$ is odd, we have $p \mid m^2$
+  and $p \mid n^2$, from which
+  $p \mid m$ and $p \mid n$. Then
+  $(m, n) \ne 1$, a contradiction.
+  Thus the triple $x, y, z$ is primitive,
+  which completes the proof.
+\end{proof}
+
+\begin{remark}
+  Given Pythagorean triples, it
+  is natural to consider the equation
+  $x^n + y^n = z^n$ for $n \ge 3$.
+\end{remark}
+
+\begin{theorem}[Wiles-Taylor, 1994]
+  The Diophantine equation
+  $x^n + y^n = z^n$ has no solutions
+  in the non-zero integers  $x, y, z$
+  for any integer $n \ge 3$.
+\end{theorem}
+
+\begin{remark}
+  The proof for the general case is
+  extremely difficult, but special
+  cases are much easier. For example,
+  the case $n = 4$ can be shown via
+  \emph{Fermat descent}.
+\end{remark}
+
+\begin{exercise}
+  Find all solutions in positive
+  integers to $x^2 + 2y^2 = z^2$.
+\end{exercise}
