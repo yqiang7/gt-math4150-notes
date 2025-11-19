@@ -1,0 +1,107 @@
+\chapter{Nov.~19 --- Fermat Descent}
+
+\section{Fermat's Last Theorem for \texorpdfstring{$n=4$}{n=4}}
+
+\begin{remark}
+  The idea is the following: One
+  shows that a given Diohpantine
+  equation has no solutions in
+  positive solutions by assuming
+  the existence of such a solution and
+  then constructing another solution in
+  positive integers having one
+  component strictly smaller than that
+  same component of the original
+  solution. This process cannot
+  be continued ad infinitum, since
+  it is not possible to construct an
+  infinite strictly decreasing
+  sequence of positive integers.
+  Thus we obtain a contradiction.
+\end{remark}
+
+\begin{theorem}
+  The Diophantine equation
+  $x^4 + y^4 = z^2$ has no solutions
+  in non-zero integers $x, y, z$.
+\end{theorem}
+
+\begin{proof}
+  Assume by way of contradiction that
+  that $x^4 + y^4 = z^2$ has a solution
+  $x_1, y_1, z_1$ in non-zero integers.
+  Without loss of generality, we
+  may assume that $x_1, y_1, z_1 > 0$
+  and $(x_1, y_1) = 1$. We will show
+  that there is another solution
+  $x_2, y_2, z_2$ in
+  positive integers such that $(x_2, y_2) = 1$
+  and $0 < z_2 < z_1$. Now
+   $x_1^2, y_1^2, z_1$ is a
+   Pythagorean triple with
+   $(x_1^2, y_1^2, z_1) = 1$, and
+   without loss of generality we
+   may assume $y_1^2$ is even
+   (thus $y_1$ is even). Thus by
+   Theorem \ref{thm:pythagorean-triples},
+   there exist $m, n \in \Z$ such
+   that $m > n > 0$, $(m, n) = 1$,
+   exactly one of $m, n$ is even, and
+   \[
+     x_1^2 = m^2 - n^2, \quad
+     y_1^2 = 2mn, \quad
+     z_1 = m^2 + n^2.
+   \]
+   Now $x_1^2 = m^2 - n^2$ implies that
+   $x_1^2 + n^2 = m^2$, so
+   $x_1, n, m$ is also a Pythagorean
+   triple $(x_1, n, m) = 1$ and
+   $n$ even. So $m$ is odd, and
+   by Theorem \ref{thm:pythagorean-triples},
+   there exist $a, b \in \Z$ such that
+   $a > b > 0$, $(a, b) = 1$, exactly
+   one of $a, b$ is even, and
+   \[
+     x_1 = a^2 - b^2, \quad
+     n = 2ab, \quad
+     m = a^2 + b^2.
+   \]
+   We wish to prove that $m, a, b$
+   are perfect squares. Since
+   $y_1^2 = 2mn = m(2n)$, and
+   $(m, 2n) = 1$, we have that $m$
+   and $2n$ must be perfect squares.
+   Since $2n$ is a perfect square,
+   there exists an integer
+   $c \in \Z$ such that $2n = 4c^2$,
+   or equivalently, $n = 2c^2$.
+   Now $n = 2ab$ implies $c^2 = ab$.
+   Since $(a, b) = 1$, we have that
+   $a$ and $b$ must be perfect squares.
+   Thus $m, a, b$ are all perfect
+   squares, and there exist
+   $x_2, y_2, z_2 \in \Z_{> 0}$
+   such that
+   $m = z_2^2$, $a = x_2^2$, and
+   $b = y_2^2$. Then $m = a^2 + b^2$
+   implies that $z_2^2 = x_2^4 + y_2^4$.
+   Also $(x_2, y_2) = 1$ since
+   $(a, b) = 1$, and we have
+   \[
+     0 < z_2 \le z_2^2 = m
+     \le m^2 < m^2 + n^2 = z_1.
+   \]
+   This argument can be iterated
+   arbitrarily many times, which
+   gives a contradiction.
+\end{proof}
+
+\begin{remark}
+  Any non-zero solution to
+  $x^4 + y^4 = z^4$ gives a nonzero
+  solution to $x^4 + y^4 = z^2$ by
+  taking $z' = z^2$, so
+  this also shows that
+  $x^4 + y^4 = z^4$ has no
+  solutions.
+\end{remark}
