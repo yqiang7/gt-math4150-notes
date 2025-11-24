@@ -1,0 +1,236 @@
+\chapter{Nov.~24 --- RSA Cryptosystem}
+
+\section{Basics of Cryptography}
+\begin{remark}
+  The objective of \emph{cryptography}
+  is to render communication
+  unintelligible to all persons
+  except the sender and the intended
+  recipients. Today we will discuss
+  \emph{public-key cryptography}.
+\end{remark}
+
+\begin{definition}
+  The information to be encoded
+  is called \emph{plaintext}, and
+  the encoded message is called
+  \emph{ciphertext}. The processes
+  of going to ciphertext from plaintext
+  is called \emph{encryption}, and
+  the reverse is called \emph{decryption}.
+\end{definition}
+
+\begin{remark}
+  We will convert all plaintext to
+  numeric values first, e.g.
+  \[
+    \text{A} \to 01, \quad \text{B} \to 02, \quad
+    \dots, \quad
+    \text{Z} \to 26, \quad
+    \text{\textvisiblespace} \to 27
+  \]
+\end{remark}
+
+\begin{remark}
+  The idea of \emph{public-key cryptography}
+  is as follows: Any member of a
+  network can send an encrypted
+  message to any other member. This
+  is done by associating a key to
+  each individual that can be
+  looked up and used: If these
+  members are labeled
+  $1, \dots, n$, then we have
+  \begin{enumerate}
+    \item A directory of public keys
+      $e_1, \dots, e_n$.
+    \item If a member of the
+      network wants to encode and
+      send a message to member $j$,
+      then the key $e_j$ is used
+      to encode the message.
+    \item Each member has a decryption
+      key $d_j$ known only to them,
+      which is used to decrypt
+      the messages sent to them back
+      to plaintext.
+    \item In principle, $d_j$ can
+      be calculated from $e_j$, but it
+      is sufficient if this cannot be
+      done in a reasonable amount of
+      time.
+  \end{enumerate}
+  The idea that underlies the dichotomy
+  between $e_j$ and $d_j$ is that there
+  is some mathematical operation
+  which is ``cheap'' to perform in
+  one direction but extremely
+  ``expensive'' in the reverse
+  direction. In RSA, this operation
+  is the multiplication of two
+  large primes (factoring is
+  difficult).
+\end{remark}
+
+\section{RSA Cryptosystem}
+
+\begin{remark}
+  The \emph{RSA encryption algorithm}
+  is a public-key cryptosystem
+  introduced in 1977 by
+  Ronald Rivest, Adi Shamir,
+  and Len Adleman.
+\end{remark}
+
+\begin{definition}[RSA encryption scheme]
+  The \emph{RSA encryption scheme}
+  involves the following:
+  \begin{enumerate}
+    \item \emph{Public encryption keys:}
+      Let $p, q$ be large primes
+      (typically $\mathtt{\sim}1000$ digits each).
+      Let $m = pq$, and $e$ a
+      positive integer such that
+      $(e, \varphi(m)) = 1$. Then the
+      encryption key is the pair
+      $(e, m)$.
+
+      Note that $p, q, \varphi(m)$
+      are \emph{not} made public.
+    \item \emph{Formatting:} Translate
+      each symbol into numeric values
+      and arrange the resulting
+      numerical string into blocks
+      of length less than $m$.
+      If a block is incomplete,
+      pad it with ``dummy'' symbols.
+    \item \emph{Encryption:}
+      Given a block $P$ (think of
+      $P$ as just a number
+      $< m$), we encrypt via
+      \[
+        P^e \equiv C \pmod{m},
+      \]
+      where $C$ is viewed as a number
+      $0 \le C < m$.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}\label{ex:rsa-encrypt}
+  Consider the
+  message ``I\textvisiblespace LIKE\textvisiblespace MATH'',
+  which corresponds to the plaintext
+  \[
+    09 \quad 27 \quad 12 \quad 09
+    \quad 11 \quad 05 \quad 27 \quad
+    13 \quad 01 \quad 20 \quad 08.
+  \]
+  Grouping this into blocks of
+  length $4$, we get:
+  \[
+    0927 \quad 1209 \quad 1105
+    \quad 2713 \quad 0120 \quad
+    0899.
+  \]
+  Taking $p = 53$, $q = 59$,
+  $m = pq = 3127$,
+  $\varphi(m) = 3016$,
+  $e = 11$, we have
+  \begin{align*}
+    0927^{11} &\equiv 2982 \pmod{3127} \\
+    1209^{11} &\equiv 1069 \pmod{3127} \\
+    1105^{11} &\equiv 2619 \pmod{3127} \\
+    2713^{11} &\equiv 2005 \pmod{3127} \\
+    0120^{11} &\equiv 2579 \pmod{3127} \\
+    0899^{11} &\equiv 0231 \pmod{3127}.
+  \end{align*}
+  Thus the ciphertext is
+  \[
+    2982\quad 1069\quad 2619\quad 2005\quad 2579\quad 0231.
+  \]
+\end{example}
+
+\begin{definition}[RSA decryption scheme]
+  The \emph{RSA decryption scheme}
+  involves the following:
+  \begin{enumerate}
+    \item \emph{Private decryption key}:
+      The decryption key is
+      $(d, m)$, where
+      $d$ is the inverse of $e$ modulo
+      $\varphi(m)$.
+
+      Note that calculating a modular
+      inverse is \emph{not} an
+      expensive operation
+      (Euclidean algorithm),
+      but this requires knowing
+      $\varphi(m)$, which is not
+      public.
+    \item \emph{Decryption:}
+      We decrypt a ciphertext block
+      $C$ via
+      \[
+        C^d \equiv P \pmod{m}.
+      \]
+      Then concatenate the results
+      and de-format in the obvious
+      way.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  Consider the encrypted message
+  $2982\ 1069\ 2619\ 2005\ 2579\ 0231$
+  from Example \ref{ex:rsa-encrypt}.
+  One can compute that $d = 1371$,
+  so the decryption key is
+  $(1371, 3127)$. The calculations are
+  then
+  \begin{align*}
+    0927 &\equiv 2982^{1371} \pmod{3127} \\
+    1209 &\equiv 1069^{1371} \pmod{3127} \\
+    1105 &\equiv 2619^{1371} \pmod{3127} \\
+    2713 &\equiv 2005^{1371} \pmod{3127} \\
+    0120 &\equiv 2579^{1371} \pmod{3127} \\
+    0899 &\equiv 0231^{1371} \pmod{3127},
+  \end{align*}
+  which recovers the original message
+  after de-formatting.
+\end{example}
+
+\begin{remark}
+  Why does this work? Suppose
+  $0 \le P < m$ is some block
+  to be encoded via
+  $P^e \equiv C \Pmod{m}$.
+  We have $ed \equiv 1 \Pmod{\varphi(m)}$.
+  Thus $ed = 1 + k \varphi(m)$
+  for some integer $k > 0$. Then
+  if $(P, m) = 1$,
+  \[
+    C^d
+    \equiv (P^e)^d
+    \equiv P^{1 + k \varphi(m)}
+    \equiv P (P^{\varphi(m)})^k
+    \equiv P \pmod{m},
+  \]
+  where the last step is
+  by Euler's theorem.
+\end{remark}
+
+\begin{exercise}
+  Let $m, P > 1$,
+  $(e, \varphi(m)) = 1$,
+  and $ed \equiv 1 \Pmod{\varphi(m)}$.
+  If $m$ is squarefree (but
+  $m, P$ not necessarily
+  coprime), show that
+  \[
+    P^{ed} \equiv P \pmod{m}.
+  \]
+  In particular, the RSA decryption
+  step still works for
+  $P$ and $m = pq$ with
+  $(P, m) \ne 1$.
+\end{exercise}
