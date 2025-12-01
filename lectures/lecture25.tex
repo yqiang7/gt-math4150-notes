@@ -1,0 +1,294 @@
+\chapter{Dec.~1 --- Sums of Squares}
+
+\section{Representations by Sums of Two Squares}
+
+\begin{remark}
+  Which integers are representable as
+  a sum of two (integer) squares? In
+  other words, for which integers
+  $n$ are there solutions to the
+  Diophantine equation
+  $n = x^2 + y^2$?
+\end{remark}
+
+\begin{prop}\label{prop:square-sum-product}
+  Let $n_1, n_2 \in \Z$ with
+  $n_1, n_2 > 0$. If
+  $n_1, n_2$ are both expressible as
+  sums of two squares, then so is their
+  product $n_1 n_2$.
+\end{prop}
+
+\begin{proof}
+  Let $x_1, x_2, y_1, y_2 \in \Z$ 
+  such that $n_1 = x_1^2 + y_1^2$ and
+  $n_2 = x_2^2 + y_2^2$. Then
+  \[
+    n_1 n_2
+    = (x_1^2 + y_1^2)(x_2^2 + y_2^2)
+    = (x_1 x_2 + y_1 y_2)^2
+    + (x_1 y_2 - x_2 y_1)^2,
+  \]
+  so $n_1 n_2$ is also expressible
+  as a sum of two squares.
+\end{proof}
+
+\begin{lemma}\label{lem:square-sum-multiple}
+  If $p$ is a prime and
+  $p \equiv 1 \Pmod{4}$, then there exist
+  $x, y \in \Z$ such that
+  \[
+    x^2 + y^2 = kp
+  \]
+  for some integer $0 < k < p$.
+\end{lemma}
+
+\begin{proof}
+  Since $p \equiv 1 \Pmod{4}$, then
+  $\big(\frac{-1}{p}\big) = 1$. Thus
+  there exists $x \in \Z$ such that
+  $0 < x \le (p - 1) / 2$ and
+  \[
+    x^2 + 1 \equiv 0 \pmod{p}.
+  \]
+  That is $x^2 + 1 = kp$ for some
+  $k > 0$. Since
+  $0 < x \le (p - 1) / 2$, we have
+  \[
+    kp = x^2 + 1
+    \le \left(\frac{p - 1}{2}\right)^2 + 1
+    < \left(\frac{p}{2}\right)^2 + 1
+    < p^2.
+  \]
+  Dividing by $p$, we get that
+  $k < p$. Clearly $k$ is positive,
+  so we get the result.
+\end{proof}
+
+\begin{prop}\label{prop:prime-sum-two-squares}
+  If $p$ is a prime with
+  $p \not\equiv 3 \Pmod{4}$, then
+  $p$ is a sum of two squares.
+\end{prop}
+
+\begin{proof}
+  The statement is clear if $p = 2$,
+  so we may assume that
+  $p \equiv 1 \Pmod{4}$. Let
+  $m$ be the least positive integer
+  such that there exist
+  $x, y \in \Z$ with
+  $x^2 + y^2 = mp$. We will show that
+  $m = 1$.
+
+  Suppose to the contrary that
+  $m \ge 2$. Then let $a, b \in \Z$ such
+  that
+  \[
+    x \equiv a \Pmod{m}, \quad
+    y \equiv b \Pmod{m}, \quad
+    - m / 2 < a, b \le m / 2.
+  \]
+  Then $a^2 + b^2 \equiv x^2 + y^2 \equiv mp = 0 \Pmod{m}$.
+  Thus $a^2 + b^2 = m k$ for some $k$.
+  Note that
+  \[
+    (a^2 + b^2)(x^2 + y^2)
+    = (m k)(m p)
+    = m^2 kp.
+  \]
+  By the proof of Proposition
+  \ref{prop:square-sum-product}, we can
+  write
+  $(a^2 + b^2)(x^2 + y^2) = (ax + by)^2 + (ay - bx)^2$.
+  So
+  \[
+    (ax + by)^2 + (ay - bx)^2
+    = m^2 k p. \tag{$*$}
+  \]
+  Note that since
+  $a \equiv x \Pmod{m}$ and
+  $b \equiv y \Pmod{m}$, we have
+  \[
+    ax + by \equiv x^2 + y^2 \equiv 0 \Pmod{m}
+    \quad \text{and} \quad
+    ay - bx \equiv xy - yx \equiv 0 \Pmod{m}.
+  \]
+  Thus $(ax + by) / m, (ay - bx) / m \in \Z$,
+  and dividing by $m^2$ in $(*)$ gives
+  \[
+    \left(\frac{ax + by}{m}\right)^2
+    + \left(\frac{ay - bx}{m}\right)^2
+    = kp.
+  \]
+  Now it suffices to show that
+  $k < m$. Since
+  $-m / 2 < a, b \le m / 2$, we have
+  \[
+    km = a^2 + b^2
+    \le \left(\frac{m}{2}\right)^2
+    + \left(\frac{m}{2}\right)^2
+    = \frac{m^2}{2},
+  \]
+  so $k \le m / 2 < m$. This
+  contradicts the minimality of $m$.
+\end{proof}
+
+\begin{theorem}
+  Let $n \in \Z$ with $n > 0$. Then
+  $n$ is a sum of two squares if
+  and only if every prime factor
+  $p$ of $n$ with
+  $p \equiv 3 \Pmod{4}$ occurs
+  with even exponent in the
+  prime factorization of $n$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$ Assume that
+  $p^{2i + 1} \mid \mid n$
+  (where $a \mid \mid b$ means that
+  $a$ exactly divides $b$). Then we
+  show that $p \equiv 1 \Pmod{4}$.
+  Since $n$ is a sum of two squares,
+  there exist $x, y \in \Z$
+  such that $n = x^2 + y^2$.
+  Let $d = (x, y)$ and
+  $a = x / d$, $b = y / d$, so
+  that $(a, b) = 1$. Also
+  let $m = n / d^2$. Then
+  \[
+    a^2 + b^2 = m.
+  \]
+  Note that $(a, m) = 1$
+  also, since if $p \mid a, m$ then
+  $p \mid b$ as well, contradicting
+  $(a, b) = 1$. The same argument
+  implies $(b, m) = 1$ as well.
+  Let $p^j \mid \mid d$.
+  Then $p^{2(i - j) + 1} \mid \mid m$.
+  Since $2(i - j) + 1 \ge 1$, we have
+  $p \mid m$. But $p \nmid a$
+  since $(a, m) = 1$, so
+  the following congruence:
+  \[
+    az \equiv b \pmod{p}
+  \]
+  has a solution $z$, namely
+  $z \equiv b \overline{a} \Pmod{p}$. Thus
+  \[
+    0 \equiv
+    m \equiv a^2 + b^2
+    \equiv a^2 + (az)^2
+    \equiv a^2(1 + z^2) \pmod{p}.
+  \]
+  Thus $p \mid a^2 (1 + z^2)$, so
+  $p \mid 1 + z^2$ as $p \nmid a$. So
+  $-1$ is a quadratic residue
+  modulo $p$,
+  so $p \not\equiv 3 \Pmod{4}$.
+
+  $(\Leftarrow)$ Suppose now that
+  every prime factor $p$ of $n$
+  with $p \equiv 3 \Pmod{4}$
+  occurs to an even exponent. Then
+  \[
+    n = T^2 p_1 p_2 \cdots p_r
+  \]
+  for some distinct primes
+  $p_1, \dots, p_r \not\equiv 3 \Pmod{4}$.
+  Each $p_i$ is then a sum of two squares
+  by Proposition \ref{prop:prime-sum-two-squares},
+  hence so is their product
+  $p_1 \cdots p_r$ by
+  Proposition \ref{prop:square-sum-product}.
+  Thus we can write $p_1 \cdots p_r = x^2 + y^2$,
+  then $n = T^2 p_1 \cdots p_r = (Tx)^2 + (Ty)^2$
+  is also a sum of two squares.
+\end{proof}
+
+\section{Representations by Sums of Three Squares}
+
+\begin{remark}
+  What about sums of 3 squares?
+\end{remark}
+
+\begin{prop}
+  Let $m, n \in \Z$, $m, n \ge 0$.
+  If $N = 4^m(8n + 7)$, then
+  $N$ is not a sum of three squares.
+\end{prop}
+
+\begin{proof}
+  Suppose first that $m = 0$, and
+  assume to the contrary that
+  $8n + 7$ is a sum of three squares.
+  So there exist $x, y, z \in \Z$ such that
+  \[
+    8n + 7 = x^2 + y^2 + z^2.
+  \]
+  Note that if $a$ is even, then
+  $a^2 \equiv 0, 4 \Pmod{8}$, and
+  if $a$ is odd, then $a^2 \equiv 1 \Pmod{8}$.
+  Then one explicitly checks that
+  it is not possible to make a
+  residue of $7$ modulo $8$ by
+  summing $3$ of $\{0, 1, 4\}$, a
+  contradiction.
+
+  Suppose now that $N = 4^m(8n + 7)$ for
+  general $m$ and assume
+  $N = x^2 + y^2 + z^2$.
+  Then
+  $N \equiv 0, 4 \Pmod{8}$, and
+  one checks (similarly as above) that
+  none of $x, y, z$ can be odd.
+  Thus $x = 2x'$, $y = 2y'$, $z = 2z'$, and
+  \[
+    4^m (8n + 7)
+    = 4((x')^2 + (y')^2 + (z')^2),
+  \]
+  so $4^{m - 1} (8n + 7)$ is a sum of three squares.
+  Repeat the argument until $m = 0$ to
+  get a contradiction.
+\end{proof}
+
+\begin{remark}
+  For numbers $n$ expressible as a sum of
+  3 squares, one gets sets of numbers
+  $(x, y, z)$ lying on the sphere
+  $x^2 + y^2 + z^2 = n$. As $n$ grows,
+  one can ask how the points $(x, y, z)$
+  distribute on the sphere.
+  These points are equidistributed
+  as $n \to \infty$
+  by a result of Duke.
+\end{remark}
+
+\section{Representations by Sums of Four Squares}
+
+\begin{remark}
+  What about sums of 4 squares?
+\end{remark}
+
+\begin{theorem}[Lagrange's four square theorem]
+  Every integer
+  $n \ge 0$ is a sum of four squares.
+\end{theorem}
+
+\begin{remark}
+  His proof requires
+  \emph{Euler's identity}: If
+  $n_1 = x_1^2 + y_1^2 + z_1^2 + w_1^2$
+  and $n_2 = x_2^2 + y_2^2 + z_2^2 + w_2^2$,
+  then
+  \begin{align*}
+    n_1 n_2 
+    &= (x_1 x_2 + y_1 y_2 + z_1 z_2 + w_1 w_2)^2
+    + (-w_1 x_2 + x_1 w_2 - y_1 z_2 + y_2 z_1)^2 \\
+    &\quad \quad + (-w_1 y_2 + y_1 w_2 - x_1 z_2 + x_2 z_1)^2
+    + (-w_1 z_2 + z_1 w_2 - x_1 y_2 + x_2 y_1)^2.
+  \end{align*}
+  This is analogous to
+  Proposition \ref{prop:square-sum-product}.
+\end{remark}
